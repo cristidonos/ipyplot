@@ -391,18 +391,33 @@ def _create_imgs_grid(
     html, grid_style_uuid = _get_default_style(img_width, zoom_scale)
 
     html += '<div id="ipyplot-imgs-container-div-%s">' % grid_style_uuid
-    html += ''.join([
-        _create_img(
-            x, width=img_width, label=y,
-            grid_style_uuid=grid_style_uuid,
-            custom_text=text, show_url=show_url,
-            force_b64=force_b64,
-            resize_image=resize_image
-        )
-        for x, y, text in zip(
-            images[:max_images], labels[:max_images],
-            custom_texts[:max_images])
-    ])
+    if max_images is None:
+        html += ''.join([
+            _create_img(
+                x, width=img_width, label=y,
+                grid_style_uuid=grid_style_uuid,
+                custom_text=text, show_url=show_url,
+                force_b64=force_b64,
+                resize_image=resize_image
+            )
+            for x, y, text in zip(
+                images, labels,
+                custom_texts)
+        ])
+
+    else:
+        html += ''.join([
+            _create_img(
+                x, width=img_width, label=y,
+                grid_style_uuid=grid_style_uuid,
+                custom_text=text, show_url=show_url,
+                force_b64=force_b64,
+                resize_image=resize_image
+            )
+            for x, y, text in zip(
+                images[:max_images], labels[:max_images],
+                custom_texts[:max_images])
+        ])
     html += '</div>'
     return html
 
