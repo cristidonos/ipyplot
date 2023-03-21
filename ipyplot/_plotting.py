@@ -5,6 +5,7 @@ It contains all the user-facing functions for displaying images in Python Notebo
 
 import numpy as _np
 from typing import Sequence
+import os
 
 from ._html_helpers import (
     _display_html, _create_tabs, _create_imgs_grid)
@@ -106,7 +107,9 @@ def plot_images(
         img_width: int = 150,
         zoom_scale: float = 2.5,
         show_url: bool = True,
-        force_b64: bool = False):
+        force_b64: bool = False,
+        display: bool = True,
+        save_path: str = None):
     """
     Simply displays images provided in `images` param in grid-like layout.
     Check optional params for max number of images to plot, labels and custom texts to add to each image, image width and other options.
@@ -143,6 +146,9 @@ def plot_images(
         Do mind that using b64 conversion vs reading directly from filepath will be slower.
         You might need to set this to `True` in environments like Google colab.
         Defaults to False.
+    display: Bool, optional
+        Display HTML inline
+    save_path: string, optional
     """  # NOQA E501
 
     images = _seq2arr(images)
@@ -164,7 +170,14 @@ def plot_images(
         show_url=show_url,
         force_b64=force_b64)
 
-    _display_html(html)
+    if save_path != None:
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        file = open(save_path, "w")
+        file.write(html)
+        file.close()
+    
+    if display:
+        _display_html(html)
 
 
 def plot_class_representations(
