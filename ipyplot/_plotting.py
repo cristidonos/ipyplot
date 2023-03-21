@@ -20,7 +20,9 @@ def plot_class_tabs(
         zoom_scale: float = 2.5,
         show_url: bool = True,
         force_b64: bool = False,
-        tabs_order: Sequence[str or int] = None):
+        tabs_order: Sequence[str or int] = None)
+        display: bool = True,
+        save_path: str = None):
     """
     Efficient and convenient way of displaying images in interactive tabs grouped by labels.
     For tabs ordering and filtering check out `tabs_order` param.
@@ -61,6 +63,10 @@ def plot_class_tabs(
         By default, tabs will be sorted alphabetically based on provided labels.
         This param can be also used as a filtering mechanism - only labels provided in `tabs_order` param will be displayed as tabs.
         Defaults to None.
+    display: Bool, optional
+        Display HTML inline
+    save_path: string, optional
+        Save HTML to path, if None will not save
     """  # NOQA E501
     assert(len(images) == len(labels))
 
@@ -82,7 +88,14 @@ def plot_class_tabs(
         force_b64=force_b64,
         tabs_order=tabs_order)
 
-    _display_html(html)
+    if save_path != None:
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        file = open(save_path, "w")
+        file.write(html)
+        file.close()
+    
+    if display:
+        _display_html(html)
 
 
 def plot_images(
