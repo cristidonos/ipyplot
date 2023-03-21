@@ -20,7 +20,7 @@ def plot_class_tabs(
         zoom_scale: float = 2.5,
         show_url: bool = True,
         force_b64: bool = False,
-        tabs_order: Sequence[str or int] = None)
+        tabs_order: Sequence[str or int] = None,
         display: bool = True,
         save_path: str = None):
     """
