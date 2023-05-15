@@ -287,7 +287,7 @@ def _create_img(
 
     img_html = ""
     if custom_text is not None:
-        img_html += '<h4 style="font-size: 12px; word-wrap: break-word;">%s</h4>' % str(custom_text)  # NOQA E501
+        img_html += '<h4 style="font-size: 12px; word-wrap: break-word; color: red;">%s</h4>' % str(custom_text)  # NOQA E501
 
     use_b64 = True
 
