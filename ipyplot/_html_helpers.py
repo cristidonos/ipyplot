@@ -467,6 +467,7 @@ def _get_default_style(img_width: int, zoom_scale: float):
             border: 2px solid #ddd;
             top: 0;
             left: 0;
+            color: red;
         }
 
         div.ipyplot-content-div-%(0)s span.ipyplot-img-close {
